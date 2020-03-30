@@ -1,0 +1,13 @@
+.error {
+    color: red;
+    font-size: 70%
+}
+
+.clear-border {
+    border-right: none !important;
+    border-left: none !important;
+}
+
+.dashboard-cards {
+    height: 300px;
+}

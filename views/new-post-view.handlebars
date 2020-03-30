@@ -1,0 +1,87 @@
+<div class='row'>
+    <div class='col-md-3'></div>
+    <div class='col-md-6'>
+        <form action ='/post' method="POST" id='newPostForm' >
+            <div class='form-group'>
+                <label for='postTitle'>Title:</label>
+                <input type='text' class='form-control' name='postTitle' id='postTitle'>
+                <div id='noTitleError' class='d-none error mt-2'>  
+                        Title is mandatory
+                </div>
+            </div>
+            <div class='form-group'>
+                <label for='postSlug'>Slug:</label>
+                <input type='text' class='form-control' name='postSlug' id='postSlug'>
+                <div id='noSlugError' class='d-none error mt-2'>  
+                    You must provide slug
+                </div>
+                <div id='slugFormatError' class='d-none error mt-2'>  
+                    Slug cannot contain special characters or space!
+                </div>
+            </div>
+            <div class='form-group'>
+                <label for='postContent'>Content:</label>
+                <textarea class='form-control' name='postContent' id='postContent'></textarea>
+                <div id='noContentError' class='d-none error mt-2'>  
+                    Content is mandatory
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-md-3'> 
+                    <a class='btn btn-secondary' href='/admin'> Discard </a>
+                </div>
+                <div class="col-md-9 text-right">    
+                        <input type='submit' id='savePost' name='savePost' class='btn btn-info' value='Save as draft'>        
+                        <input type='submit' id='publishPost' name='publishPost' class='btn btn-primary' value='Publish'>
+                </div>
+                <p class="error">{{errorMessage}}</p>
+            </div>
+
+        </form>
+    </div>
+    <div class='col-md-3'></div>
+</div>
+
+<script>
+
+     const form = document.querySelector('#newPostForm');
+     const titleField = document.querySelector('#postTitle');
+     const contentField = document.querySelector('#postContent');
+     const slugField = document.querySelector('#postSlug');
+     const noTitleError = document.querySelector('#noTitleError');
+     const noContentError = document.querySelector('#noContentError');
+     const noSlugError = document.querySelector('#noSlugError');
+     const slugFormatError = document.querySelector('#slugFormatError');
+     form.addEventListener('submit', checkInputFields);
+  
+     function checkInputFields(event) {
+        if(!titleField.value){
+            event.preventDefault();
+            noTitleError.classList.remove('d-none');
+        }
+        else{
+            noTitleError.classList.add('d-none');
+        }
+        if(!contentField.value){
+            event.preventDefault();
+            noContentError.classList.remove('d-none');
+        }
+        else{
+            noContentError.classList.add('d-none');
+        }
+        if(!slugField.value){
+            event.preventDefault();
+            noSlugError.classList.remove('d-none');
+        }
+        else{
+            noSlugError.classList.add('d-none');
+        }
+        const patt = new RegExp(/^[a-z0-9-]+$/i);
+        const res = patt.test($("#postSlug").val());
+            
+            if ($("#postSlug").val() != null && !res) {
+                event.preventDefault();
+                slugFormatError.classList.remove('d-none');
+            }
+     }
+</script>

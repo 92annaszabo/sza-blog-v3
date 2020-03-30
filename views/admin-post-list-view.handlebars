@@ -1,0 +1,25 @@
+
+<table class=" table table-hover table-bordered mb-3">
+    <div class='text-right'>
+        <button class = 'btn btn-primary mb-3' onclick="location.href='/post'">New Post</button>
+    </div>
+    <thead class='table'>
+        <th class='text-left p-3'>Title</th>
+        <th class='text-left p-3'>Author</th>
+        <th class='text-right p-3'>Publish date</th>
+        <th class='text-right p-3'>Last modification</th>
+        <th class='text-center p-3'>Operations</th>
+    </thead>
+    <tbody class='table'>
+        {{#each posts}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.author}}</td>
+            <td class='text-right'>{{this.created_at}}</td>
+            <td class='text-right'>{{this.edited_at}}</td>
+            <td class='text-center'><button class ='btn btn-info' onclick="location.href='/edit-post/{{this.id}}'">Edit</button></td>
+        </tr>
+        {{/each}}
+
+    </tbody>
+</table>
